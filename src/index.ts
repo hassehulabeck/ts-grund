@@ -1,31 +1,32 @@
-let arr: number[] = [3, 44, 5];
-let x: string = "slfjadflj";
-
-let z: [Boolean, String];
-
-z = [false, "My name"];
-
-let aa: unknown;
-
-aa = 4;
-
-const y: number = 4;
-
-interface User {
-    name: string;
-    id: number;
+// Ett produkt-interface
+enum Color {
+    Black,
+    White,
+    Magenta,
+    Cyan,
 }
 
-const user: User = {
-    name: "3b",
+interface Product {
+    id: number;
+    name: string;
+    price: number;
+    color?: Color;
+}
+
+let product = {
     id: 3,
+    name: "Toycar AE-12",
+    price: 39.39,
 };
 
-console.log(user);
-
-enum Color {
-    Red,
-    Green,
-    Blue,
+interface WriteFunction {
+    (product: Product): string;
 }
-let c: Color = Color.Red;
+
+let writeProduct: WriteFunction;
+
+writeProduct = function (prod: Product) {
+    return prod.name + prod.color;
+};
+
+console.log(writeProduct(product));
