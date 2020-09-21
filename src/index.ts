@@ -1,32 +1,24 @@
-// Ett produkt-interface
-enum Color {
-    Black,
-    White,
-    Magenta,
-    Cyan,
+interface Jersey {
+    playerNumber: number;
+    playerName: string;
+    primaryColor: string;
+    secondaryColor?: string;
+    sponsorLogo?: string;
+    size: Size;
 }
 
-interface Product {
-    id: number;
-    name: string;
-    price: number;
-    color?: Color;
+enum Size {
+    xs,
+    s,
+    m,
+    l,
+    xl,
+    xxl,
 }
 
-let product = {
-    id: 3,
-    name: "Toycar AE-12",
-    price: 39.39,
+let myJersey: Jersey = {
+    playerName: "Andersson",
+    playerNumber: 52,
+    primaryColor: "red",
+    size: Size.xl,
 };
-
-interface WriteFunction {
-    (product: Product): string;
-}
-
-let writeProduct: WriteFunction;
-
-writeProduct = function (prod: Product) {
-    return prod.name + prod.color;
-};
-
-console.log(writeProduct(product));
