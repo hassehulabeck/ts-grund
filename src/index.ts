@@ -5,14 +5,6 @@ enum Color {
     Magenta,
     Cyan,
 }
-
-// Ett interface för products-arrayen
-interface Products {
-    [index: number]: Product;
-}
-
-let products: Products = [];
-
 interface Product {
     id: number;
     name: string;
@@ -20,7 +12,14 @@ interface Product {
     color?: Color;
 }
 
-let toyCar = {
+// Ett interface för products-arrayen
+interface Products {
+    [index: number]: Product;
+}
+
+let products: Product[];
+
+let toyCar: Product = {
     id: 3,
     name: "Toycar AE-12",
     price: 39.39,
@@ -36,7 +35,9 @@ writeProduct = function (prod: Product) {
     return prod.name + prod.color;
 };
 
-console.log(writeProduct(product));
+console.log(writeProduct(toyCar));
+
+products = [toyCar];
 
 function addProduct(product: Product): void {
     products.push(product);
