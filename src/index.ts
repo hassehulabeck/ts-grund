@@ -13,11 +13,16 @@ interface Product {
 }
 
 // Ett interface för products-arrayen
-interface Products {
+// extends Array<object> för att få tillgång till .push och
+// andra metoder
+
+interface Products extends Array<object> {
     [index: number]: Product;
 }
 
-let products: Product[];
+// Sätt både products och cart till värdet av tomma arrayer.
+let products: Products = [];
+let cart: Products = [];
 
 let toyCar: Product = {
     id: 3,
@@ -25,24 +30,41 @@ let toyCar: Product = {
     price: 39.39,
 };
 
-interface WriteFunction {
-    (product: Product): string;
-}
-
-let writeProduct: WriteFunction;
-
-writeProduct = function (prod: Product) {
-    return prod.name + prod.color;
+let fuzzyAnimal: Product = {
+    id: 1,
+    name: "Adorable fuzzy animal",
+    price: 120,
+    color: Color.Cyan,
 };
-
-console.log(writeProduct(toyCar));
-
-products = [toyCar];
 
 function addProduct(product: Product): void {
     products.push(product);
 }
 
+function addToCart(product: Product): void {
+    let index = products.findIndex((p) => {
+        return p == product;
+    });
+    cart.push(products.splice(index, 1));
+}
+
+// function getTotalPrice(cart: Products): number {
+//     let total = cart.reduce((acc, product) => {
+//         return (acc += product.price);
+//     }, 0);
+//     return total;
+// }
+
 addProduct(toyCar);
+addProduct(fuzzyAnimal);
+
+console.log("P: " + products.length);
+console.log("C: " + cart.length);
+
+addToCart(toyCar);
+
+console.log("P efter trade: " + products.length);
+console.log("C efter trade: " + cart.length);
 
 (window as any).products = products;
+(window as any).addToCart = addToCart;
